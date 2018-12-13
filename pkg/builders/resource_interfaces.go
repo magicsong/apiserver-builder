@@ -18,7 +18,9 @@ package builders
 
 import (
 	"context"
+
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1beta1 "k8s.io/apimachinery/pkg/apis/meta/v1beta1"
 	"k8s.io/apimachinery/pkg/fields"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -69,6 +71,8 @@ type StorageBuilder interface {
 	TriggerFunc(obj runtime.Object) []storage.MatchValue
 	GetSelectableFields(obj HasObjectMeta) fields.Set
 	BasicMatch(label labels.Selector, field fields.Selector) storage.SelectionPredicate
+	ShortNames() []string
+	ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*metav1beta1.Table, error)
 }
 
 type SchemeFns interface {
