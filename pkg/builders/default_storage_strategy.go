@@ -20,11 +20,7 @@ import (
 	"context"
 	"fmt"
 	"reflect"
-	"time"
 
-	"k8s.io/apimachinery/pkg/api/meta"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	metav1beta1 "k8s.io/apimachinery/pkg/apis/meta/v1beta1"
 	"k8s.io/apimachinery/pkg/fields"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -68,13 +64,11 @@ func (DefaultStorageStrategy) Build(builder StorageBuilder, store *StorageWrappe
 	store.CreateStrategy = builder
 	store.UpdateStrategy = builder
 	store.DeleteStrategy = builder
-<<<<<<< HEAD
 	store.ShortNamesProvider = builder
-=======
+
 	if table, ok := builder.(rest.TableConvertor); ok {
 		store.TableConvertor = table
 	}
->>>>>>> table
 
 	options.AttrFunc = builder.GetAttrs
 	options.TriggerFunc = builder.TriggerFunc
@@ -157,7 +151,6 @@ func (b DefaultStorageStrategy) BasicMatch(label labels.Selector, field fields.S
 func (DefaultStorageStrategy) ShortNames() []string {
 	return nil
 }
-
 
 //
 // Status Strategies
